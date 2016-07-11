@@ -3,13 +3,15 @@
 
 // module WebSocket
 
+var W3CWebSocket = require('websocket').w3cwebsocket;
+
 exports.specViolation = function(s) {
   throw new Error(s);
 }
 
 exports.newWebSocketImpl = function(url, protocols) {
   return function() {
-    var socket = new WebSocket(url, protocols);
+    var socket = new W3CWebSocket(url, protocols);
     var getSocketProp = function (prop) {
       return function() { return socket[prop]; }
     }
